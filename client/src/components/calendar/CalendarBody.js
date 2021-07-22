@@ -7,6 +7,7 @@ const TableStyle = styled.table`
 `;
 
 const getCalendarArray = (ym) => {
+  // calendarArray: 달력을 일차원 배열로 표현. 일요일부터 시작하며 1일 전에는 0으로 채운다.
   const firstDay = new Date(ym.year, ym.month, 1).getDay();
   const lastDate = new Date(ym.year, ym.month + 1, 0).getDate();
   const calendarArray = [];
