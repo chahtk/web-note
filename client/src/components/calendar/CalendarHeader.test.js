@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Calendar from './Calendar';
 
-describe('Calendar Buttons', () => {
+describe('Calendar Header Test', () => {
   const getYearMonthElement = (calendar) =>
     calendar.getByText(/\d{4}년 \d{1,2}월/i);
 
@@ -36,13 +36,13 @@ describe('Calendar Buttons', () => {
     const plusButton = calendar.getByText('>');
     fireEvent.click(plusButton);
     const month = getYearMonth(yearMonth);
-    expect(month).toEqual(thisMonth + 1);
+    expect(month).toEqual(thisMonth === 12 ? 1 : thisMonth + 1);
   });
 
   test('Minus Month', () => {
     const minusButton = calendar.getByText('<');
     fireEvent.click(minusButton);
     const month = getYearMonth(yearMonth);
-    expect(month).toEqual(thisMonth - 1);
+    expect(month).toEqual(thisMonth === 1 ? 12 : thisMonth - 1);
   });
 });
