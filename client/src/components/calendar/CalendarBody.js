@@ -6,6 +6,12 @@ const TableStyle = styled.table`
   border-collapse: collapse;
 `;
 
+const TdStyle = styled.td`
+  text-align: center;
+  border: 1px solid grey;
+  color: ${({ today }) => (today ? 'red' : 'black')};
+`;
+
 const getCalendarArray = (ym) => {
   // calendarArray: 달력을 일차원 배열로 표현. 일요일부터 시작하며 1일 전에는 0으로 채운다.
   const firstDay = new Date(ym.year, ym.month, 1).getDay();
@@ -21,6 +27,11 @@ const getCalendarArray = (ym) => {
 };
 
 const renderCalendar = (ym) => {
+  const todayInfo = new Date();
+  const todayYear = todayInfo.getFullYear();
+  const todayMonth = todayInfo.getMonth();
+  const todayDate = todayInfo.getDate();
+
   const calendarArray = getCalendarArray(ym);
   const rows = Math.floor((calendarArray.length - 1) / 7) + 1;
   const calendar = [];
@@ -28,7 +39,14 @@ const renderCalendar = (ym) => {
     const row = [];
     for (let j = 0; j < 7; j += 1) {
       const day = calendarArray[i * 7 + j];
-      row.push(<td key={`cell${i}${j}`}>{day === 0 ? null : day}</td>);
+      let isToday = false;
+      if (todayDate === day && ym.year === todayYear && ym.month === todayMonth)
+        isToday = true;
+      row.push(
+        <TdStyle key={`cell${i}${j}`} today={isToday}>
+          {day === 0 ? null : day}
+        </TdStyle>,
+      );
     }
     calendar.push(<tr key={`asf${i}`}>{row}</tr>);
   }
