@@ -1,51 +1,38 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-const ButtonStyle = styled.button`
-  background-color: grey;
-`;
-
-const YearMonthStyle = styled.div`
-  display: inline-block;
-  width: 100px;
-  text-align: center;
-`;
+import CalendarHeader from './CalendarHeader';
 
 const TableStyle = styled.table`
   border: 1px solid grey;
   border-collapse: collapse;
 `;
 
-const increaseMonth = (ym, setYm) => () => {
-  const { year, month } = ym;
-  if (month + 1 === 13) {
-    setYm({
-      ...ym,
-      year: year + 1,
-      month: 1,
-    });
-    return;
+const getCalendarArray = (ym) => {
+  const firstDay = new Date(ym.year, ym.month, 1).getDay();
+  const lastDate = new Date(ym.year, ym.month + 1, 0).getDate();
+  const calendarArray = [];
+  for (let i = 0; i < 7; i += 1) {
+    if (i !== firstDay) {
+      calendarArray.push(0); // prev month's day
+    } else break;
   }
-  setYm({
-    ...ym,
-    month: month + 1,
-  });
+  for (let i = 1; i <= lastDate; i += 1) calendarArray.push(i);
+  return calendarArray;
 };
 
-const decreaseMonth = (ym, setYm) => () => {
-  const { year, month } = ym;
-  if (month - 1 === 0) {
-    setYm({
-      ...ym,
-      year: year - 1,
-      month: 12,
-    });
-    return;
+const renderCalendar = (ym) => {
+  const calendarArray = getCalendarArray(ym);
+  const rows = Math.floor((calendarArray.length - 1) / 7) + 1;
+  const calendar = [];
+  for (let i = 0; i < rows; i += 1) {
+    const row = [];
+    for (let j = 0; j < 7; j += 1) {
+      const day = calendarArray[i * 7 + j];
+      row.push(<td key={`cell${i}${j}`}>{day === 0 ? null : day}</td>);
+    }
+    calendar.push(<tr key={`asf${i}`}>{row}</tr>);
   }
-  setYm({
-    ...ym,
-    month: month - 1,
-  });
+  return calendar;
 };
 
 const Calendar = () => {
@@ -56,43 +43,9 @@ const Calendar = () => {
     month: date.getMonth(),
   });
 
-  const getCalendarArray = () => {
-    const firstDay = new Date(ym.year, ym.month, 1).getDay();
-    const lastDate = new Date(ym.year, ym.month + 1, 0).getDate();
-    const calendarArray = [];
-    for (let i = 0; i < 7; i += 1) {
-      if (i !== firstDay) {
-        calendarArray.push(0); // prev month's day
-      } else break;
-    }
-    for (let i = 1; i <= lastDate; i += 1) calendarArray.push(i);
-    return calendarArray;
-  };
-
-  const renderCalendar = () => {
-    const calendarArray = getCalendarArray();
-    const rows = Math.floor((calendarArray.length - 1) / 7) + 1;
-    const calendar = [];
-    for (let i = 0; i < rows; i += 1) {
-      const row = [];
-      for (let j = 0; j < 7; j += 1) {
-        const day = calendarArray[i * 7 + j];
-        row.push(<td key={`cell${i}${j}`}>{day === 0 ? null : day}</td>);
-      }
-      calendar.push(<tr key={`asf${i}`}>{row}</tr>);
-    }
-    return calendar;
-  };
-
   return (
-    <div>
-      <div id="calendar-header">
-        <ButtonStyle onClick={decreaseMonth(ym, setYm)}>&lt;</ButtonStyle>
-        <YearMonthStyle>
-          {ym.year}년 {ym.month + 1}월
-        </YearMonthStyle>
-        <ButtonStyle onClick={increaseMonth(ym, setYm)}>&gt;</ButtonStyle>
-      </div>
+    <div id="calendar">
+      <CalendarHeader ym={ym} setYm={setYm} />
       <div id="calendar-body">
         <TableStyle>
           <thead>
@@ -102,7 +55,7 @@ const Calendar = () => {
               ))}
             </tr>
           </thead>
-          <tbody>{renderCalendar()}</tbody>
+          <tbody>{renderCalendar(ym)}</tbody>
         </TableStyle>
       </div>
     </div>
