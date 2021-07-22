@@ -12,6 +12,7 @@
     "react/jsx-one-expression-per-line": 0,
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
+    "react/prop-types": 0,
     "prettier/prettier": [2, {"endOfLine": "auto"}]
   },
   "ignorePatterns": ["node_modules/", "*.test.js"]
