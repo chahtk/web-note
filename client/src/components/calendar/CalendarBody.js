@@ -1,15 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const TableStyle = styled.table`
   border: 1px solid grey;
   border-collapse: collapse;
 `;
 
+const TodayStyle = css`
+  color: white;
+  background-color: red;
+  height: 10px;
+  border-radius: 10px;
+`;
+
 const TdStyle = styled.td`
   text-align: center;
   border: 1px solid grey;
-  color: ${({ today }) => (today ? 'red' : 'black')};
+  color: black;
+  ${({ today }) => (today ? TodayStyle : null)}
 `;
 
 const getCalendarArray = (ym) => {
@@ -48,7 +56,7 @@ const renderCalendar = (ym) => {
         </TdStyle>,
       );
     }
-    calendar.push(<tr key={`asf${i}`}>{row}</tr>);
+    calendar.push(<tr key={`row${i}`}>{row}</tr>);
   }
   return calendar;
 };
