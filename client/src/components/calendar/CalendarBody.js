@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const TableStyle = styled.table`
   border-collapse: collapse;
-  width: 650px;
+  margin: auto;
 `;
 
 const TodayStyle = css`
@@ -17,6 +17,7 @@ const TdStyle = styled.td`
   font-weight: bold;
   color: black;
   height: 90px;
+  width: 90px;
   cursor: pointer;
   ${({ today }) => (today ? TodayStyle : null)}
 `;
@@ -72,18 +73,16 @@ const CalendarBody = ({ ym }) => {
   const days = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
-    <div id="calendar-body">
-      <TableStyle>
-        <thead>
-          <tr>
-            {days.map((day) => (
-              <th key={`dayIs${day}`}>{day}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>{renderCalendar(ym)}</tbody>
-      </TableStyle>
-    </div>
+    <TableStyle id="calendar-body">
+      <thead>
+        <tr>
+          {days.map((day) => (
+            <th key={`dayIs${day}`}>{day}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>{renderCalendar(ym)}</tbody>
+    </TableStyle>
   );
 };
 
