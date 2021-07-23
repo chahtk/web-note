@@ -33,14 +33,14 @@ describe('Calendar Header Test', () => {
   });
 
   test('Add Month', () => {
-    const plusButton = calendar.getByText('>');
+    const plusButton = calendar.container.querySelector('.right-arrow');
     fireEvent.click(plusButton);
     const month = getYearMonth(yearMonth);
     expect(month).toEqual(thisMonth === 12 ? 1 : thisMonth + 1);
   });
 
   test('Minus Month', () => {
-    const minusButton = calendar.getByText('<');
+    const minusButton = calendar.container.querySelector('.left-arrow');
     fireEvent.click(minusButton);
     const month = getYearMonth(yearMonth);
     expect(month).toEqual(thisMonth === 1 ? 12 : thisMonth - 1);
