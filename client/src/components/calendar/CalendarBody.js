@@ -2,21 +2,22 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const TableStyle = styled.table`
-  border: 1px solid grey;
   border-collapse: collapse;
+  width: 650px;
 `;
 
 const TodayStyle = css`
   color: white;
-  background-color: red;
-  height: 10px;
-  border-radius: 10px;
+  background-color: #ff8585;
+  border-radius: 50%;
 `;
 
 const TdStyle = styled.td`
   text-align: center;
-  border: 1px solid grey;
+  font-weight: bold;
   color: black;
+  height: 90px;
+  cursor: pointer;
   ${({ today }) => (today ? TodayStyle : null)}
 `;
 
