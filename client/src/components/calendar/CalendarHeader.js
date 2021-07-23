@@ -1,15 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonStyle = styled.button`
-  background-color: grey;
+const CalendarHeaderStyle = styled.div`
+  text-align: center;
+  margin: 15px 0px 25px;
+`;
+
+const ButtonStyle = styled.div`
+  display: inline-block;
+  cursor: pointer;
+
+  width: 0px;
+  height: 0px;
+  border: 7px solid white;
+
+  &.left-arrow {
+    border-left: 0;
+    border-right: 7px solid black;
+  }
+  &.right-arrow {
+    border-right: 0;
+    border-left: 7px solid black;
+  }
 `;
 
 const YearMonthStyle = styled.div`
   display: inline-block;
-  width: 100px;
+  width: 120px;
   text-align: center;
+  font-weight: bold;
+  font-size: large;
 `;
+
 const increaseMonth = (ym, setYm) => () => {
   const { year, month } = ym;
   if (month + 1 === 13) {
@@ -50,13 +72,13 @@ const CalendarHeader = ({ ym, setYm }) => {
     });
   */
   return (
-    <div id="calendar-header">
-      <ButtonStyle onClick={decreaseMonth(ym, setYm)}>&lt;</ButtonStyle>
+    <CalendarHeaderStyle id="calendar-header">
+      <ButtonStyle className="left-arrow" onClick={decreaseMonth(ym, setYm)} />
       <YearMonthStyle>
         {ym.year}년 {ym.month + 1}월
       </YearMonthStyle>
-      <ButtonStyle onClick={increaseMonth(ym, setYm)}>&gt;</ButtonStyle>
-    </div>
+      <ButtonStyle className="right-arrow" onClick={increaseMonth(ym, setYm)} />
+    </CalendarHeaderStyle>
   );
 };
 
