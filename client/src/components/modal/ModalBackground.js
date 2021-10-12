@@ -10,7 +10,7 @@ const modalFade = keyframes`
   }
 `;
 
-const SignModalStyle = styled.div`
+const ModalBackStyle = styled.div`
   background-color: grey;
   opacity: 70%;
   position: fixed;
@@ -21,9 +21,9 @@ const SignModalStyle = styled.div`
   animation: ${modalFade} 0.2s;
 `;
 
-const SignModal = ({ setSignModal }) => {
-  const closeSignModal = () => setSignModal(false);
-  return <SignModalStyle onClick={closeSignModal}>1</SignModalStyle>;
+const ModalBackground = ({ setModal }) => {
+  const closeSignModal = () => setModal(false);
+  return <ModalBackStyle onClick={closeSignModal} />;
 };
 
-export default SignModal;
+export default ModalBackground;
