@@ -18,11 +18,11 @@ const RightMenu = styled.div`
   align-items: center;
 `;
 
-const Header = ({ setSignModal }) => {
+const Header = () => {
   return (
     <HeaderStyle>
       <RightMenu>
-        <SignInButton setSignModal={setSignModal} />
+        <SignInButton />
       </RightMenu>
     </HeaderStyle>
   );

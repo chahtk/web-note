@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import Calendar from './components/calendar/Calendar';
+import React from 'react';
+// import Calendar from './components/calendar/Calendar';
 import Header from './components/header/Header';
-import SignModal from './components/sign/SignModal';
+import TodoContainer from './components/todolist/Container';
 
 const App = () => {
-  const [signModal, setSignModal] = useState(false);
   return (
     <>
-      <Header setSignModal={setSignModal} />
-      {signModal ? <SignModal setSignModal={setSignModal} /> : null}
       {/* <Calendar /> */}
+      <Header />
+      {/* <TodoContainer type="todo" />
+      <TodoContainer type="not-todo" /> */}
     </>
   );
 };

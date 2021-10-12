@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ModalBackground from '../modal/ModalBackground';
 
 const ButtonStyle = styled.div`
   display: inline-block;
@@ -7,9 +8,15 @@ const ButtonStyle = styled.div`
   cursor: pointer;
 `;
 
-const SignInButton = ({ setSignModal }) => {
-  const openLoginModal = () => setSignModal(true);
-  return <ButtonStyle onClick={openLoginModal}>로그인</ButtonStyle>;
+const SignInButton = () => {
+  const [modal, setModal] = useState(false);
+  const openLoginModal = () => setModal(true);
+  return (
+    <>
+      {modal ? <ModalBackground setModal={setModal} /> : null}
+      <ButtonStyle onClick={openLoginModal}>로그인</ButtonStyle>
+    </>
+  );
 };
 
 export default SignInButton;
