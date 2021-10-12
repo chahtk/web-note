@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ModalBackground from '../modal/ModalBackground';
 
 const HeaderStyle = styled.article`
   position: relative;
@@ -22,10 +23,13 @@ const AddButton = styled.button`
 `;
 
 const Header = ({ type }) => {
+  const [modal, setModal] = useState(false);
+  const openModal = () => setModal(true);
   return (
     <HeaderStyle type={type}>
       <Title type={type}>{type}</Title>
-      <AddButton>+</AddButton>
+      <AddButton onClick={openModal}>+</AddButton>
+      {modal ? <ModalBackground setModal={setModal} /> : null}
     </HeaderStyle>
   );
 };
