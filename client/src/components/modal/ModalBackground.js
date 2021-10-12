@@ -18,7 +18,7 @@ const ModalBackStyle = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  animation: ${modalFade} 0.2s;
+  animation: ${modalFade} 0.25s;
 `;
 
 const ModalBackground = ({ setModal }) => {
