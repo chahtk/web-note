@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ModalBackground from '../modal/ModalBackground';
 
 const HeaderStyle = styled.article`
@@ -22,15 +22,38 @@ const AddButton = styled.button`
   background-color: inherit;
 `;
 
+const modalFade = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+`;
+
+const ModalBody = styled.article`
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  animation: ${modalFade} 0.25s;
+`;
+
 const Header = ({ type }) => {
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(true);
   return (
-    <HeaderStyle type={type}>
-      <Title type={type}>{type}</Title>
-      <AddButton onClick={openModal}>+</AddButton>
-      {modal ? <ModalBackground setModal={setModal} /> : null}
-    </HeaderStyle>
+    <>
+      <HeaderStyle type={type}>
+        <Title type={type}>{type}</Title>
+        <AddButton onClick={openModal}>+</AddButton>
+        {modal ? <ModalBackground setModal={setModal} /> : null}
+      </HeaderStyle>
+      {modal ? <ModalBody /> : null}
+    </>
   );
 };
 
