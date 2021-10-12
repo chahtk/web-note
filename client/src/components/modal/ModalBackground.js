@@ -22,8 +22,8 @@ const ModalBackStyle = styled.div`
 `;
 
 const ModalBackground = ({ setModal }) => {
-  const closeSignModal = () => setModal(false);
-  return <ModalBackStyle onClick={closeSignModal} />;
+  const closeModal = () => setModal(false);
+  return <ModalBackStyle onClick={closeModal} />;
 };
 
 export default ModalBackground;
